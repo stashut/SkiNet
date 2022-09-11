@@ -367,3 +367,5 @@ bin
 obj
 appsettings.json
 *.db
+.idea/.idea.skinet/.idea/indexLayout.xml
+.idea/.idea.skinet/.idea/vcs.xml
