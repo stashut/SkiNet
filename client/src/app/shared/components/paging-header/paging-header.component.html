@@ -2,7 +2,7 @@
     <span *ngIf="totalCount && totalCount > 0">
         Showing 
         <strong>
-            {{(shopParams.pageNumber - 1) * pageSize + 1}} -
+            {{(pageNumber - 1) * pageSize + 1}} -
             {{pageNumber * pageSize
                 > this.totalCount 
                 ? this.totalCount 
