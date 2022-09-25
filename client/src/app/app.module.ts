@@ -3,11 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { ShopModule } from './shop/shop.module';
 import { HomeModule } from './home/home.module';
 
 @NgModule({
@@ -20,7 +18,6 @@ import { HomeModule } from './home/home.module';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    ShopModule,
     HomeModule
   ],
   providers: [],
