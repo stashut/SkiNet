@@ -821,3 +821,5 @@ $RECYCLE.BIN/
 
 node_modules/*
 .angular
+*.db
+*.rdb
