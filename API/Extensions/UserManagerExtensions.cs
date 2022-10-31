@@ -7,7 +7,7 @@ namespace API.Extensions;
 
 public static class UserManagerExtensions
 {
-    public static async Task<AppUser> FindUserByClaimsPrincipalWithAddressAsync(this UserManager<AppUser> input, ClaimsPrincipal user)
+    public static async Task<AppUser> FindByUserByClaimsPrincipalWithAddressAsync(this UserManager<AppUser> input, ClaimsPrincipal user)
     {
         var email = user.FindFirstValue(ClaimTypes.Email);
 
