@@ -14,6 +14,6 @@ public class Address
     
     [Required]
     public string AppUserId { get; set; }
-
+    
     public AppUser AppUser { get; set; }
 }
