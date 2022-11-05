@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20221105103724_OrderEntityAdded")]
-    partial class OrderEntityAdded
+    [Migration("20221105143303_DeliveryTimeFix")]
+    partial class DeliveryTimeFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

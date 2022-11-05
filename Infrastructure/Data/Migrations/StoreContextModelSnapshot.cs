@@ -89,7 +89,7 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DeliveryType")
+                    b.Property<string>("DeliveryTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
