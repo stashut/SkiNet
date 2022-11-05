@@ -33,7 +33,7 @@ public class OrderService : IOrderService
 
         var subtotal = items.Sum(item => item.Price * item.Quantity);
 
-        var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
+        var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal, "1");
         _unitOfWork.Repository<Order>().Add(order);
 
         var result = await _unitOfWork.Complete();
