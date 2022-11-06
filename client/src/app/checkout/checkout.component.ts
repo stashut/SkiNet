@@ -7,16 +7,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  checkOutForm: FormGroup;
+  checkoutForm: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.createCheckoutFrom();
+    this.createCheckoutForm();
   }
 
-  createCheckoutFrom () {
-    this.checkOutForm = this.fb.group({
+  createCheckoutForm () {
+    this.checkoutForm = this.fb.group({
       addressForm: this.fb.group({
         firstName: [null, Validators.required],
         lastName: [null, Validators.required],

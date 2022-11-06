@@ -18,7 +18,7 @@ import { CheckoutSuccessComponent } from './checkout-success/checkout-success.co
     CheckoutDeliveryComponent,
     CheckoutReviewComponent,
     CheckoutPaymentComponent,
-    CheckoutSuccessComponent
+    CheckoutSuccessComponent,
   ],
   imports: [
     CommonModule,
