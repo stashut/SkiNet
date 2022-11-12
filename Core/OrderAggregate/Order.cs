@@ -25,7 +25,7 @@ public class Order : BaseEntity
     public IReadOnlyList<OrderItem> OrderItems { get; set; }
     public decimal Subtotal { get; set; }
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
-    private string PaymentIntentId { get; set; } = 1.ToString();
+    public string PaymentIntentId { get; set; }
 
     public decimal GetTotal()
     {
