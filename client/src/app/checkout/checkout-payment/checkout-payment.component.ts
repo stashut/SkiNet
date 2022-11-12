@@ -16,9 +16,9 @@ declare var Stripe;
 })
 export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   @Input() checkoutForm: FormGroup;
-  @ViewChild('cardNumber', {static: true}) cardNumberElement: ElementRef;
-  @ViewChild('cardExpiry', {static: true}) cardExpiryElement: ElementRef;
-  @ViewChild('cardCvc', {static: true}) cardCvcElement: ElementRef;
+  @ViewChild('cardNumber', { static: true }) cardNumberElement: ElementRef;
+  @ViewChild('cardExpiry', { static: true }) cardExpiryElement: ElementRef;
+  @ViewChild('cardCvc', { static: true }) cardCvcElement: ElementRef;
   stripe: any;
   cardNumber: any;
   cardExpiry: any;
@@ -26,10 +26,14 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   cardErrors: any;
   cardHandler = this.onChange.bind(this);
   loading = false;
+  cardNumberValid = false;
+  cardExpiryValid = false;
+  cardCvcValid = false;
 
-  constructor(private basketService: BasketService, private checkoutService: CheckoutService, private toastr: ToastrService, private router: Router) { }
+  constructor(private basketService: BasketService, private checkoutService: CheckoutService,
+    private toastr: ToastrService, private router: Router) { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.stripe = Stripe('pk_test_51M2Uw5JJAMAiY2l9fVu5kG8etig0NHs8EyWgwpS1dn0hUwkCe5lG0bCioTkbH9eW6MpVlgWsQkc10W6C3eb0ndQz00I7s6rvu3');
     const elements = this.stripe.elements();
 
@@ -46,18 +50,28 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     this.cardCvc.addEventListener('change', this.cardHandler);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.cardNumber.destroy();
     this.cardExpiry.destroy();
     this.cardCvc.destroy();
   }
 
-  onChange({error}) {
-    if(error) {
-      this.cardErrors = error.message;
-    }
-    else{ 
+  onChange(event) {
+    if (event.error) {
+      this.cardErrors = event.error.message;
+    } else {
       this.cardErrors = null;
+    }
+    switch(event.elementType) {
+      case 'cardNumber':
+        this.cardNumberValid = event.complete;
+        break;
+      case 'cardExpiry':
+        this.cardExpiryValid = event.complete;
+        break;
+      case 'cardCvc':
+        this.cardCvcValid = event.complete;
+        break;
     }
   }
 
@@ -66,23 +80,20 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     const basket = this.basketService.getCurrentBasketValue();
     try {
       const createdOrder = await this.createOrder(basket);
-    const paymentResult = await this.confirmPaymentWithStripe(basket);
-
-    if(paymentResult.paymentIntent) {
-      this.basketService.deleteLocalBasket(basket.id);
-      const navigationExtras: NavigationExtras = {state: createdOrder};
-      this.router.navigate(['checkout/success'], navigationExtras);
+      const paymentResult = await this.confirmPaymentWithStripe(basket);
+      if (paymentResult.paymentIntent) {
+        this.basketService.deleteLocalBasket(basket.id);
+        const navigationExtras: NavigationExtras = { state: createdOrder };
+        this.router.navigate(['checkout/success'], navigationExtras);
+      } else {
+        this.toastr.error(paymentResult.error.message);
+      }
+      this.loading = false;
+    } catch (error) {
+      console.log(error);
+      this.loading = false;
     }
-    else {
-      this.toastr.error(paymentResult.error.message);
-    }
-    this.loading = false;
   }
-  catch (error) {
-    console.log(error);
-    this.loading = false;
-  }
-}
 
   private async confirmPaymentWithStripe(basket) {
     return this.stripe.confirmCardPayment(basket.clientSecret, {
@@ -100,12 +111,13 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     return this.checkoutService.createOrder(orderToCreate).toPromise();
   }
 
+
   private getOrderToCreate(basket: IBasket) {
     return {
       basketId: basket.id,
       deliveryMethodId: +this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
       shipToAddress: this.checkoutForm.get('addressForm').value
-    }
+    };
   }
 
 }

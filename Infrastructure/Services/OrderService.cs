@@ -41,7 +41,7 @@ public class OrderService : IOrderService
         if (existingOrder != null)
         {
             _unitOfWork.Repository<Order>().Delete(existingOrder);
-            await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+            await _paymentService.CreateOrUpdatePaymentIntent(basket.Id);
         }
 
         var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal, basket.PaymentIntentId);
