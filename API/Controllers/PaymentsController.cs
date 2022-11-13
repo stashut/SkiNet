@@ -12,7 +12,7 @@ public class PaymentsController : BaseApiController
 {
     private readonly IPaymentService _paymentService;
     private readonly ILogger<PaymentsController> _logger;
-    private const string WhSecret = "";
+    private const string WhSecret = "whsec_fce3f46ea14660101ba934f6f1eb78b54b31d845a6ff6e5bea68bbe6629e3bb5";
 
     public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger)
     {
