@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ShopService {
-  baseUrl = environment .apiUrl;
+  baseUrl = environment.apiUrl;
   products: IProduct[] = [];
   brands: IBrand[] = [];
   types: IType[] = [];
