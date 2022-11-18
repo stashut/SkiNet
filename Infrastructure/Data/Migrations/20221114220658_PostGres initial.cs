@@ -6,10 +6,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Data.Migrations
 {
-    /// <inheritdoc />
     public partial class PostGresinitial : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -62,12 +60,12 @@ namespace Infrastructure.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BuyerEmail = table.Column<string>(type: "text", nullable: true),
                     OrderDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    ShipToAddressFirstName = table.Column<string>(name: "ShipToAddress_FirstName", type: "text", nullable: true),
-                    ShipToAddressLastName = table.Column<string>(name: "ShipToAddress_LastName", type: "text", nullable: true),
-                    ShipToAddressStreet = table.Column<string>(name: "ShipToAddress_Street", type: "text", nullable: true),
-                    ShipToAddressCity = table.Column<string>(name: "ShipToAddress_City", type: "text", nullable: true),
-                    ShipToAddressState = table.Column<string>(name: "ShipToAddress_State", type: "text", nullable: true),
-                    ShipToAddressZipCode = table.Column<string>(name: "ShipToAddress_ZipCode", type: "text", nullable: true),
+                    ShipToAddress_FirstName = table.Column<string>(type: "text", nullable: true),
+                    ShipToAddress_LastName = table.Column<string>(type: "text", nullable: true),
+                    ShipToAddress_Street = table.Column<string>(type: "text", nullable: true),
+                    ShipToAddress_City = table.Column<string>(type: "text", nullable: true),
+                    ShipToAddress_State = table.Column<string>(type: "text", nullable: true),
+                    ShipToAddress_ZipCode = table.Column<string>(type: "text", nullable: true),
                     DeliveryMethodId = table.Column<int>(type: "integer", nullable: true),
                     Subtotal = table.Column<decimal>(type: "numeric", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
@@ -119,9 +117,9 @@ namespace Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ItemOrderedProductItemId = table.Column<int>(name: "ItemOrdered_ProductItemId", type: "integer", nullable: true),
-                    ItemOrderedProductName = table.Column<string>(name: "ItemOrdered_ProductName", type: "text", nullable: true),
-                    ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "text", nullable: true),
+                    ItemOrdered_ProductItemId = table.Column<int>(type: "integer", nullable: true),
+                    ItemOrdered_ProductName = table.Column<string>(type: "text", nullable: true),
+                    ItemOrdered_PictureUrl = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     OrderId = table.Column<int>(type: "integer", nullable: true)
@@ -158,7 +156,6 @@ namespace Infrastructure.Data.Migrations
                 column: "ProductTypeId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

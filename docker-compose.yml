@@ -18,7 +18,7 @@ services:
       - 8081:8081
     depends_on:
       - redis
-    
+
   db:
     image: postgres
     restart: always
@@ -27,12 +27,15 @@ services:
       POSTGRES_USER: appuser
     ports:
       - 5432:5432
-    
+
   adminer:
-      image: adminer
-      restart: always
-      ports:
-        - 8080:8080
-    
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  dotnet:
+    image: mcr.microsoft.com/dotnet/runtime:6.0
+
 volumes:
   redis-data:
